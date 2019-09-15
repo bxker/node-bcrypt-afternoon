@@ -14,17 +14,17 @@ export default class AddTreasure extends Component {
   }
 
   addTreasure() {
-    // post to /api/treasure/user here
-    const { treasureURL } = this.state;
-    axios
-      .post('/api/treasure/user', { treasureURL: treasureURL })
-      .then(response => {
+    const {treasureURL} = this.state
+    axios.post('/api/treasure/user', {treasureURL: treasureURL})
+      .then(response=>{
         this.props.addMyTreasure(response.data);
-        this.setState({ treasureURL: '' });
+        this.setState({
+          treasureURL: ''
+        })
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(err=>{
+        console.log(err)
+      })
   }
 
   render() {

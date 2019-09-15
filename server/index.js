@@ -6,8 +6,8 @@ const app = express();
 
 //controllers
 const {register, login, logout} = require('./controllers/authController');
-const {dragonTreasure, getUserTreasure, addUserTreasure} = require('./controllers/treasureController');
-const {usersOnly} = require('./middleware/authMiddleware');
+const {dragonTreasure, getUserTreasure, addUserTreasure, getAllTreasure} = require('./controllers/treasureController');
+const {usersOnly, adminsOnly} = require('./middleware/authMiddleware');
 
 const {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env;
 
@@ -35,10 +35,10 @@ app.post('/auth/register', register);
 app.post('/auth/login', login);
 app.get('/auth/logout', logout);
 
-//dragon
 app.get('/api/treasure/dragon', dragonTreasure);
 app.get('/api/treasure/user', usersOnly, getUserTreasure);
 app.post('/api/treasure/user', usersOnly, addUserTreasure);
+app.get('/api/treasure/all', adminsOnly, getAllTreasure)
 
 app.listen(SERVER_PORT, () => {
     console.log(`Listening on port ${SERVER_PORT}`)
