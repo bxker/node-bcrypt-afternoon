@@ -15,9 +15,9 @@ async function addUserTreasure(req, res){
     const db = req.app.get('db');
     const {treasureURL} = req.body;
     const {id} = req.session.user;
-    console.log(req.session.user)
-    const userTreasure = await db.add_user_treasure(treasureURL, id);
-    return res.status(200).json(userTreasure)
+    console.log(req.session.user.id)
+    const treasure = await db.add_user_treasure(treasureURL, id);
+    return res.status(200).json(treasure);
 }
 
 async function getAllTreasure(req, res){

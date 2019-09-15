@@ -34,11 +34,10 @@ async function login(req, res){
     const areEqual = await bcrypt.compare(password, hash);
     if(areEqual){
         req.session.username = username;
-        console.log(req.session.user)
         req.session.user = {
             isAdmin: user.is_admin, 
             username: user.username,
-            password: user.hash
+            id: user.id
         }
         res.status(200).json(req.session.user)
     } else {
